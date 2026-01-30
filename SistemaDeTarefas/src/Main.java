@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane
+import javax.swing.JOptionPane;
 
 
 public class Main {
@@ -47,20 +47,23 @@ public class Main {
                         }
                     }
                 }
-                case 4:
-                    System.out.println("Digite o índice da tarefa a ser removida:");
-                    int indiceRemover = scanner.nextInt();
-                    gerenciador.removerTarefa(indiceRemover);
-                    break;
-                case 5:
-                    System.out.println("Saindo do sistema...");
-                    break;
-                default:
-                    System.out.println("Opção Inválida. Tente Outra Opção.");
-            }    
-        } while (opcao != 5);
-
-        scanner.close();
+                case 4 -> {
+                    String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa a remover:");
+                    if (idxStr != null) {
+                        try {
+                            int indiceRemover = Integer.parseInt(idxStr);
+                            gerenciador.removerTarefa(indiceRemover);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Índice inválido!");
+                        }
+                    }
+                }
+                case 5 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
+                default ->{
+                    if (opcao < 1 || opcao > 5)
+                    JOptionPane.showMessageDialog(null, "Opção Inválida. Tente Outra Opção.");
+                 }    
+             } 
+        }while (true);
     }
-}
 }
