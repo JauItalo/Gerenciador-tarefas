@@ -34,14 +34,19 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Descrição inválida. Tarefa não adicionada.");
                     }
                 }
-                case 2:
-                    gerenciador.listarTarefas();
-                    break;
-                case 3:
-                    System.out.println("Digite o índice da tarefa a ser marcada como concluída:");
-                    int indiceConcluida = scanner.nextInt();
-                    gerenciador.marcarTarefaConcluida(indiceConcluida);
-                    break;
+                case 2 -> gerenciador.listarTarefas();
+
+                case 3 -> {
+                    String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa concluída:");
+                    if (idxStr != null) {
+                        try {
+                            int indiceConcluida = Integer.parseInt(idxStr);
+                            gerenciador.marcarTarefaConcluida(indiceConcluida);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Índice inválido!");
+                        }
+                    }
+                }
                 case 4:
                     System.out.println("Digite o índice da tarefa a ser removida:");
                     int indiceRemover = scanner.nextInt();
