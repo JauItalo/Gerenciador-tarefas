@@ -37,6 +37,9 @@ public class Main {
                             java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
                             Tarefa tarefa = new Tarefa(descricao, data);
                             gerenciador.adicionarTarefa(tarefa);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Data inválida.");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Descrição inválida. Tarefa não adicionada.");
                     }
