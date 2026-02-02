@@ -1,11 +1,16 @@
 
-public class Tarefa {
-    private final String descricao;
-    private boolean concluida;
+import java.time.LocalDate;
 
-    public Tarefa(String descricao) {
+
+public class Tarefa {
+    private String descricao;
+    private boolean concluida;
+    private LocalDate data;
+
+    public Tarefa(String descricao, LocalDate data) {
         this.descricao = descricao;
         this.concluida = false;
+        this.data = data;
     }
 
     public void marcarConcluida() {
@@ -20,7 +25,18 @@ public class Tarefa {
         return concluida;
     }
 
+    public void setDescricao(String novaDescricao) {
+        this.descricao = novaDescricao;
+    }
+
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 }

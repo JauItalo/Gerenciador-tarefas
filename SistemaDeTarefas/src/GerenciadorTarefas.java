@@ -18,33 +18,60 @@ public class GerenciadorTarefas {
     
     public void listarTarefas() {
         if (tarefas.isEmpty()) {
-            System.out.println("Nenhuma tarefa cadastrada.");
+            javax.swing.JOptionPane.showMessageDialog(null, "Nenhuma tarefa cadastrada.");
         } else {
+            StringBuilder lista = new StringBuilder("Tarefas cadastradas:\n");
             for (int i = 0; i < tarefas.size(); i++) {
                 Tarefa tarefa = tarefas.get(i);
-                String status = tarefa.isConcluida() ? "Concluída" : "Pendente";
-                System.out.println(i + ". " + tarefa.getDescricao() + " - " + status);
-            }
+                lista.append((i + 1)).append(". ")
+                    .append(tarefa.getDescricao());
+                    if (tarefa.isConcluida()) {
+                        lista.append("(Concluída)");
+                    }
+                    lista.append("\n");
+                }
+                javax.swing.JOptionPane.showMessageDialog(null, lista.toString());      
         }
     }
 
     public void marcarTarefaConcluida(int indice) {
-        if (indice >= 0 && indice < tarefas.size()) {
-            Tarefa tarefa = tarefas.get(indice);
-            tarefa.setConcluida(true);
-            System.out.println("Tarefa marcada como concluída com sucesso.");
+       try {
+        int idx = indice - 1;
+        if (idx >= 0 && idx < tarefas.size()) {
+            Tarefa tarefa = tarefas.get(idx);
+            tarefa.marcarConcluida();
+            javax.swing.JOptionPane.showMessageDialog(null, "Tarefa marcada como concluída com sucesso.");
         } else {
-            System.out.println("Índice inválido. Nenhuma tarefa marcada como concluída.");
+            javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa marcada como concluída.");
         }
-    }
+    } catch (IndexOutOfBoundsException e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa marcada como concluída.");
+       }
+    }   
 
     public void removerTarefa(int indice) {
-        if (indice >= 0 && indice < tarefas.size()) {
-            tarefas.remove(indice);
-            System.out.println("Tarefa removida com sucesso.");
+       try {
+        int idx = indice - 1;
+        if (idx >= 0 && idx < tarefas.size()) {
+            Tarefa removida = tarefas.remove(idx);
+            javax.swing.JOptionPane.showMessageDialog(null, "Tarefa removida com sucesso.");
         } else {
-            System.out.println("Índice inválido. Nenhuma tarefa removida.");
+            javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa removida.");
         }
+       } catch (IndexOutOfBoundsException e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa removida.");
+       }
     }
+
+    public void editarTarefa(int indice, String novaDescricao) {
+    int idx = indice - 1;
+    if (idx >= 0 && idx < tarefas.size()) {
+        Tarefa tarefa = tarefas.get(idx);
+        tarefa.setDescricao(novaDescricao);
+        javax.swing.JOptionPane.showMessageDialog(null, "Tarefa editada com sucesso.");
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa editada.");
+    }
+}
 
 }

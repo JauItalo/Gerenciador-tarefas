@@ -13,11 +13,15 @@ public class Main {
                     2. Listar Tarefas
                     3. Marcar tarefa como concluída
                     4. Remover Tarefa
-                    5. Sair
+                    5. Editar Tarefa
+                    6. Sair
                     """;
 
             String input = JOptionPane.showInputDialog(menu);
-            if (input == null) break;
+            if (input == null) {
+                JOptionPane.showMessageDialog(null, "Saindo do sistema...");
+                break;
+            }
             try {
                 opcao = Integer.parseInt(input);
             } catch (NumberFormatException e) {
@@ -28,8 +32,11 @@ public class Main {
                 case 1 -> {
                     String descricao = JOptionPane.showInputDialog("Digite a descrição da tarefa:");
                     if (descricao != null && !descricao.isBlank()) {
-                        Tarefa tarefa = new Tarefa(descricao);
-                        gerenciador.adicionarTarefa(tarefa);
+                        String dataStr = JOptionPane.showInputDialog("Digite a data da tarefa (DD-MM-AAAA):");
+                        try {
+                            java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
+                            Tarefa tarefa = new Tarefa(descricao, data);
+                            gerenciador.adicionarTarefa(tarefa);
                     } else {
                         JOptionPane.showMessageDialog(null, "Descrição inválida. Tarefa não adicionada.");
                     }
@@ -58,12 +65,29 @@ public class Main {
                         }
                     }
                 }
-                case 5 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
+                case 5 -> {
+                    String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa a editar:");
+                    if (idxStr != null) {
+                        try {
+                            int indiceEditar = Integer.parseInt(idxStr);
+                            String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição:");
+                            if (novaDescricao != null && !novaDescricao.isBlank()) {
+                                gerenciador.editarTarefa(indiceEditar, novaDescricao);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Descrição inválida. Nenhuma tarefa editar.");
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Índice inválido!");
+                        }
+                    }
+                }
+                case 6 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                 default ->{
-                    if (opcao < 1 || opcao > 5)
+                    if (opcao < 1 || opcao > 6)
                     JOptionPane.showMessageDialog(null, "Opção Inválida. Tente Outra Opção.");
-                 }    
-             } 
+                 }
+
+                }
         }while (true);
     }
 }
