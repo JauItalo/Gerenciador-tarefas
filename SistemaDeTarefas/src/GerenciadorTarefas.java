@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,14 @@ public class GerenciadorTarefas {
 
     }
 
-    public void adicionarTarefa(Tarefa tarefa) {
-        tarefas.add(tarefa);
+    public void adicionarTarefa(Tarefa novaTarefa) {
+        for (Tarefa tarefa : tarefas) {
+            if (tarefa.getDescricao().equalsIgnoreCase(novaTarefa.getDescricao())) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Tarefa já existe.");
+                return;
+            }
+        }
+        tarefas.add(novaTarefa);
         System.out.println("Tarefa adicionada com sucesso");
     }
     
@@ -21,16 +28,16 @@ public class GerenciadorTarefas {
         if (tarefas.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(null, "Nenhuma tarefa cadastrada.");
         } else {
-            StringBuilder lista = new StringBuilder("Tarefas cadastradas:\n");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            StringBuilder lista = new StringBuilder("Tarefas cadastradas:\n\n");
             for (int i = 0; i < tarefas.size(); i++) {
                 Tarefa tarefa = tarefas.get(i);
+                String status = tarefa.isConcluida() ? "✔️ Concluída" : "⏳ Pendente";
                 lista.append((i + 1)).append(". ")
                     .append(tarefa.getDescricao())
-                    .append(" - Data:").append(tarefa.getData());
-                    if (tarefa.isConcluida()) {
-                        lista.append("(Concluída)");
-                    }
-                    lista.append("\n");
+                    .append("\n     Data:").append(tarefa.getData())
+                    .append("\n     Status:").append(status)
+                    .append("\n-----------------------------\n");
                 }
                 javax.swing.JOptionPane.showMessageDialog(null, lista.toString());      
         }

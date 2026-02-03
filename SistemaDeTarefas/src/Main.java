@@ -30,11 +30,11 @@ public class Main {
             }
 
             switch (opcao) {
-                
+
                 case 1 -> {
                     String descricao = JOptionPane.showInputDialog("Digite a descrição da tarefa:");
                     if (descricao != null && !descricao.isBlank()) {
-                        String dataStr = JOptionPane.showInputDialog("Digite a data da tarefa (DD-MM-AAAA):");
+                        String dataStr = JOptionPane.showInputDialog("Digite a data da tarefa (AAAA-MM-DD):");
                         try {
                             java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
                             Tarefa tarefa = new Tarefa(descricao, data);
@@ -78,7 +78,7 @@ public class Main {
                             int indiceEditar = Integer.parseInt(idxStr);
                             String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição:");
                             if (novaDescricao != null && !novaDescricao.isBlank()) {
-                                String novaDataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (DD-MM-AAAA):");
+                                String novaDataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (AAAA-MM-DD):");
                                 try {
                                     java.time.LocalDate novaData = java.time.LocalDate.parse(novaDataStr);
                                     gerenciador.editarTarefa(indiceEditar, novaDescricao, novaData);
