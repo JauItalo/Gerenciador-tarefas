@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,8 @@ public class GerenciadorTarefas {
             for (int i = 0; i < tarefas.size(); i++) {
                 Tarefa tarefa = tarefas.get(i);
                 lista.append((i + 1)).append(". ")
-                    .append(tarefa.getDescricao());
+                    .append(tarefa.getDescricao())
+                    .append(" - Data:").append(tarefa.getData());
                     if (tarefa.isConcluida()) {
                         lista.append("(Concluída)");
                     }
@@ -63,11 +65,12 @@ public class GerenciadorTarefas {
        }
     }
 
-    public void editarTarefa(int indice, String novaDescricao) {
+    public void editarTarefa(int indice, String novaDescricao, LocalDate novaData) {
     int idx = indice - 1;
     if (idx >= 0 && idx < tarefas.size()) {
         Tarefa tarefa = tarefas.get(idx);
         tarefa.setDescricao(novaDescricao);
+        tarefa.setData(novaData);
         javax.swing.JOptionPane.showMessageDialog(null, "Tarefa editada com sucesso.");
     } else {
         javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa editada.");

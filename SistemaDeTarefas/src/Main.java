@@ -28,7 +28,9 @@ public class Main {
                 JOptionPane.showMessageDialog(null, "Opção Inválida. Tente Outra Opção.");
                 continue;
             }
+
             switch (opcao) {
+                
                 case 1 -> {
                     String descricao = JOptionPane.showInputDialog("Digite a descrição da tarefa:");
                     if (descricao != null && !descricao.isBlank()) {
@@ -44,6 +46,7 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Descrição inválida. Tarefa não adicionada.");
                     }
                 }
+
                 case 2 -> gerenciador.listarTarefas();
 
                 case 3 -> {
@@ -75,7 +78,13 @@ public class Main {
                             int indiceEditar = Integer.parseInt(idxStr);
                             String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição:");
                             if (novaDescricao != null && !novaDescricao.isBlank()) {
-                                gerenciador.editarTarefa(indiceEditar, novaDescricao);
+                                String novaDataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (DD-MM-AAAA):");
+                                try {
+                                    java.time.LocalDate novaData = java.time.LocalDate.parse(novaDataStr);
+                                    gerenciador.editarTarefa(indiceEditar, novaDescricao, novaData);
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(null, "Data inválida. Nenhuma tarefa editada.");
+                                }
                             } else {
                                 JOptionPane.showMessageDialog(null, "Descrição inválida. Nenhuma tarefa editar.");
                             }
