@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 
 public class GerenciadorTarefas {
@@ -24,25 +27,30 @@ public class GerenciadorTarefas {
         System.out.println("Tarefa adicionada com sucesso");
     }
     
-    public void listarTarefas() {
+    public void listarTarefasEmTabela() {
         if (tarefas.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(null, "Nenhuma tarefa cadastrada.");
-        } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            StringBuilder lista = new StringBuilder("Tarefas cadastradas:\n\n");
-            for (int i = 0; i < tarefas.size(); i++) {
-                Tarefa tarefa = tarefas.get(i);
-                String status = tarefa.isConcluida() ? "✔️ Concluída" : "⏳ Pendente";
-                lista.append((i + 1)).append(". ")
-                    .append(tarefa.getDescricao())
-                    .append("\n     Data:").append(tarefa.getData())
-                    .append("\n     Prioridade:").append(tarefa.getPrioridade())
-                    .append("\n     Status:").append(status)
-                    .append("\n-----------------------------\n");
-                }
-                javax.swing.JOptionPane.showMessageDialog(null, lista.toString());      
+            return;
         }
-    }
+
+        String[] colunas = {"#", "Descrição", "Data", "Prioridade", "Status"};
+        Object[][] dados = new Object[tarefas.size()][colunas.length];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        for (int i = 0; i < tarefas.size(); i++) {
+            Tarefa tarefa = tarefas.get(i);
+            dados[i][0] = i + 1;
+            dados[i][1] = tarefa.getDescricao();
+            dados[i][2] = tarefa.getData().format(formatter);
+            dados[i][3] = tarefa.getPrioridade();
+            dados[i][4] = tarefa.isConcluida() ? "Concluída" : "Pendente";
+        }
+
+        JTable tabela = new JTable(dados, colunas);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        tabela.setFillsViewportHeight(true);
+        javax.swing.JOptionPane.showMessageDialog(null, scrollPane, "Tarefas em Tabela", JOptionPane.PLAIN_MESSAGE);      
+        }
 
     public void marcarTarefaConcluida(int indice) {
        try {
@@ -57,7 +65,18 @@ public class GerenciadorTarefas {
     } catch (IndexOutOfBoundsException e) {
         javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa marcada como concluída.");
        }
-    }   
+    }
+    
+    public void desmarcarTarefaConcluida(int indice) {
+        int idx = indice - 1;
+        if (idx >= 0 && idx < tarefas.size()) {
+            Tarefa tarefa = tarefas.get(idx);
+            tarefa.setConcluida(false);
+            javax.swing.JOptionPane.showMessageDialog(null, "Tarefa desmarcada com sucesso.");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa desmarcada.");
+        }
+    }
 
     public void removerTarefa(int indice) {
        try {

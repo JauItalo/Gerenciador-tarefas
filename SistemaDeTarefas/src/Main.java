@@ -11,10 +11,11 @@ public class Main {
                     ==== Sistema de Tarefas ====
                     1. Adicionar Tarefa
                     2. Listar Tarefas
-                    3. Marcar tarefa como concluída
-                    4. Remover Tarefa
-                    5. Editar Tarefa
-                    6. Sair
+                    3. Remover Tarefa
+                    4. Editar Tarefa
+                    5. Marcar tarefa como concluída
+                    6. Desmarcar tarefa como concluída
+                    7. Sair
                     """;
 
             String input = JOptionPane.showInputDialog(menu);
@@ -63,20 +64,10 @@ public class Main {
                     }
                 }
 
-                case 2 -> gerenciador.listarTarefas();
+                case 2 -> gerenciador.listarTarefasEmTabela();
+
 
                 case 3 -> {
-                    String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa concluída:");
-                    if (idxStr != null) {
-                        try {
-                            int indiceConcluida = Integer.parseInt(idxStr);
-                            gerenciador.marcarTarefaConcluida(indiceConcluida);
-                        } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Índice inválido!");
-                        }
-                    }
-                }
-                case 4 -> {
                     String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa a remover:");
                     if (idxStr != null) {
                         try {
@@ -87,15 +78,15 @@ public class Main {
                         }
                     }
                 }
-                case 5 -> {
+                case 4 -> {
                     String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa a editar:");
                     if (idxStr != null) {
                         try {
                             int indiceEditar = Integer.parseInt(idxStr);
                             String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição:");
                             if (novaDescricao != null && !novaDescricao.isBlank()) {
-                                String novaDataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (AAAA-MM-DD):");
-                                java.time.LocalDate novaData = java.time.LocalDate.parse(novaDataStr);
+                                String dataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (AAAA-MM-DD):");
+                                java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
                                 try {
                                     String [] opcoesPrioridade = {"BAIXA", "MEDIA", "ALTA"};
                                     String prioridadeStr = (String) JOptionPane.showInputDialog(
@@ -109,7 +100,7 @@ public class Main {
                                     );
                                     if (prioridadeStr != null) {
                                         Prioridade novaPrioridade = Prioridade.valueOf(prioridadeStr);
-                                        gerenciador.editarTarefa(indiceEditar, novaDescricao, novaData, novaPrioridade);
+                                        gerenciador.editarTarefa(indiceEditar, novaDescricao, data, novaPrioridade);
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Prioridade não selecionada. Nenhuma tarefa editada.");
                                     }
@@ -125,9 +116,31 @@ public class Main {
                         }
                     }
                 }
-                case 6 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
+                case 5 -> {
+                    String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa concluída:");
+                    if (idxStr != null) {
+                        try {
+                            int indice = Integer.parseInt(idxStr);
+                            gerenciador.marcarTarefaConcluida(indice);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Índice inválido!");
+                        }
+                    }
+                }
+                case 6 -> {
+                    String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa a desmarcar como concluída:");
+                    if (idxStr != null) {
+                        try {
+                            int indice = Integer.parseInt(idxStr);
+                            gerenciador.desmarcarTarefaConcluida(indice);
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "índice inválido!");
+                        }
+                    }
+                }
+                case 7 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                 default ->{
-                    if (opcao < 1 || opcao > 6)
+                    if (opcao < 1 || opcao > 7)
                     JOptionPane.showMessageDialog(null, "Opção Inválida. Tente Outra Opção.");
                  }
 

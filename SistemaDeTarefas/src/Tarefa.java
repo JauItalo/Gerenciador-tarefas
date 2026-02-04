@@ -30,8 +30,8 @@ public class Tarefa {
         this.descricao = novaDescricao;
     }
 
-    public void setConcluida(boolean concluida) {
-        this.concluida = concluida;
+    public void setConcluida(boolean valor) {
+        this.concluida = valor;
     }
 
     public LocalDate getData() {
@@ -46,4 +46,5 @@ public class Tarefa {
     public void setPrioridade(Prioridade prioridade) {
         this.prioridade = prioridade;
     }
+    
 }
