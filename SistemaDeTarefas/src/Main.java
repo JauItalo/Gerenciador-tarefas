@@ -28,17 +28,33 @@ public class Main {
                 JOptionPane.showMessageDialog(null, "Opção Inválida. Tente Outra Opção.");
                 continue;
             }
-
+            
             switch (opcao) {
 
                 case 1 -> {
                     String descricao = JOptionPane.showInputDialog("Digite a descrição da tarefa:");
+                    String[] opcoesPrioridade = {"BAIXA", "MEDIA", "ALTA"};
+                   
                     if (descricao != null && !descricao.isBlank()) {
                         String dataStr = JOptionPane.showInputDialog("Digite a data da tarefa (AAAA-MM-DD):");
+                        java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
                         try {
-                            java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
-                            Tarefa tarefa = new Tarefa(descricao, data);
-                            gerenciador.adicionarTarefa(tarefa);
+                             String prioridadeStr = (String) JOptionPane.showInputDialog(
+                        null,
+                        "Escolha a prioridade da tarefa:",
+                        "Prioridade",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoesPrioridade,
+                        opcoesPrioridade[0]
+                    );
+                    if (prioridadeStr != null) {
+                        Prioridade prioridade = Prioridade.valueOf(prioridadeStr);
+                        Tarefa tarefa = new Tarefa(descricao, data, prioridade);
+                        gerenciador.adicionarTarefa(tarefa);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Prioridade não selecionada.");
+                    }
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, "Data inválida.");
                         }
@@ -79,9 +95,25 @@ public class Main {
                             String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição:");
                             if (novaDescricao != null && !novaDescricao.isBlank()) {
                                 String novaDataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (AAAA-MM-DD):");
+                                java.time.LocalDate novaData = java.time.LocalDate.parse(novaDataStr);
                                 try {
-                                    java.time.LocalDate novaData = java.time.LocalDate.parse(novaDataStr);
-                                    gerenciador.editarTarefa(indiceEditar, novaDescricao, novaData);
+                                    String [] opcoesPrioridade = {"BAIXA", "MEDIA", "ALTA"};
+                                    String prioridadeStr = (String) JOptionPane.showInputDialog(
+                                        null,
+                                        "Escolha a nova prioridade da tarefa",
+                                        "Prioridade",
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        null,
+                                        opcoesPrioridade,
+                                        opcoesPrioridade[0]
+                                    );
+                                    if (prioridadeStr != null) {
+                                        Prioridade novaPrioridade = Prioridade.valueOf(prioridadeStr);
+                                        gerenciador.editarTarefa(indiceEditar, novaDescricao, novaData, novaPrioridade);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Prioridade não selecionada. Nenhuma tarefa editada.");
+                                    }
+                                    
                                 } catch (Exception e) {
                                     JOptionPane.showMessageDialog(null, "Data inválida. Nenhuma tarefa editada.");
                                 }

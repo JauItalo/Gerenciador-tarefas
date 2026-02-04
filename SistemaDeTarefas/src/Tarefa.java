@@ -1,16 +1,17 @@
 
 import java.time.LocalDate;
 
-
 public class Tarefa {
     private String descricao;
     private boolean concluida;
     private LocalDate data;
+    private Prioridade prioridade;
 
-    public Tarefa(String descricao, LocalDate data) {
+    public Tarefa(String descricao, LocalDate data, Prioridade prioridade) {
         this.descricao = descricao;
         this.concluida = false;
         this.data = data;
+        this.prioridade = prioridade;
     }
 
     public void marcarConcluida() {
@@ -38,5 +39,11 @@ public class Tarefa {
     }
     public void setData(LocalDate data) {
         this.data = data;
+    }
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
     }
 }

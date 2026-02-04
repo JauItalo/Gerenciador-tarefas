@@ -36,6 +36,7 @@ public class GerenciadorTarefas {
                 lista.append((i + 1)).append(". ")
                     .append(tarefa.getDescricao())
                     .append("\n     Data:").append(tarefa.getData())
+                    .append("\n     Prioridade:").append(tarefa.getPrioridade())
                     .append("\n     Status:").append(status)
                     .append("\n-----------------------------\n");
                 }
@@ -63,7 +64,7 @@ public class GerenciadorTarefas {
         int idx = indice - 1;
         if (idx >= 0 && idx < tarefas.size()) {
             Tarefa removida = tarefas.remove(idx);
-            javax.swing.JOptionPane.showMessageDialog(null, "Tarefa removida com sucesso.");
+            javax.swing.JOptionPane.showMessageDialog(null, "Tarefa removida:" + removida.getDescricao());
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa removida.");
         }
@@ -72,12 +73,13 @@ public class GerenciadorTarefas {
        }
     }
 
-    public void editarTarefa(int indice, String novaDescricao, LocalDate novaData) {
+    public void editarTarefa(int indice, String novaDescricao, LocalDate novaData, Prioridade novaPrioridade) {
     int idx = indice - 1;
     if (idx >= 0 && idx < tarefas.size()) {
         Tarefa tarefa = tarefas.get(idx);
         tarefa.setDescricao(novaDescricao);
         tarefa.setData(novaData);
+        tarefa.setPrioridade(novaPrioridade);
         javax.swing.JOptionPane.showMessageDialog(null, "Tarefa editada com sucesso.");
     } else {
         javax.swing.JOptionPane.showMessageDialog(null, "Índice inválido. Nenhuma tarefa editada.");
