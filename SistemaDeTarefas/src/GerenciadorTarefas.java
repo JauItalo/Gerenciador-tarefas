@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -46,7 +47,11 @@ public class GerenciadorTarefas {
             dados[i][4] = tarefa.isConcluida() ? "Concluída" : "Pendente";
         }
 
-        JTable tabela = new JTable(dados, colunas);
+        JTable tabela = new JTable(dados, colunas){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JScrollPane scrollPane = new JScrollPane(tabela);
         tabela.setFillsViewportHeight(true);
         javax.swing.JOptionPane.showMessageDialog(null, scrollPane, "Tarefas em Tabela", JOptionPane.PLAIN_MESSAGE);      
