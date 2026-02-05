@@ -13,11 +13,11 @@ public class Main {
                     2. Listar Tarefas
                     3. Remover Tarefa
                     4. Editar Tarefa
-                    5. Marcar tarefa como concluída
-                    6. Desmarcar tarefa como concluída
-                    7. Sair
+                    5. Pesquisar Tarefa
+                    6. Marcar tarefa como concluída
+                    7. Desmarcar tarefa como concluída
+                    8. Sair
                     """;
-
             String input = JOptionPane.showInputDialog(menu);
             if (input == null) {
                 JOptionPane.showMessageDialog(null, "Saindo do sistema...");
@@ -116,7 +116,17 @@ public class Main {
                         }
                     }
                 }
+
                 case 5 -> {
+                    String termo = JOptionPane.showInputDialog("Digite a palavra-chave para pesquisar:");
+                    if (termo != null && !termo.isBlank()){
+                        gerenciador.pesquisarTarefas(termo);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Palavra-chave inválida!");
+                    }
+                }
+
+                case 6 -> {
                     String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa concluída:");
                     if (idxStr != null) {
                         try {
@@ -127,20 +137,20 @@ public class Main {
                         }
                     }
                 }
-                case 6 -> {
+                case 7 -> {
                     String idxStr = JOptionPane.showInputDialog("Digite o índice da tarefa a desmarcar como concluída:");
                     if (idxStr != null) {
                         try {
                             int indice = Integer.parseInt(idxStr);
                             gerenciador.desmarcarTarefaConcluida(indice);
                         } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "índice inválido!");
+                            JOptionPane.showMessageDialog(null, "Índice inválido!");
                         }
                     }
                 }
-                case 7 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
+                case 8 -> JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                 default ->{
-                    if (opcao < 1 || opcao > 7)
+                    if (opcao < 1 || opcao > 8)
                     JOptionPane.showMessageDialog(null, "Opção Inválida. Tente Outra Opção.");
                  }
 

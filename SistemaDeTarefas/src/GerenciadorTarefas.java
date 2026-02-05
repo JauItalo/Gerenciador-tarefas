@@ -52,6 +52,28 @@ public class GerenciadorTarefas {
         javax.swing.JOptionPane.showMessageDialog(null, scrollPane, "Tarefas em Tabela", JOptionPane.PLAIN_MESSAGE);      
         }
 
+        public void pesquisarTarefas(String termo) {
+            StringBuilder resultado = new StringBuilder("Tarefas encontradas:\n");
+            boolean encontrou = false;
+            for (int i = 0; i < tarefas.size(); i++) {
+                Tarefa tarefa =  tarefas.get(i);
+                if (tarefa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+                    encontrou = true;
+                    resultado.append((i + 1)).append(".")
+                    .append(tarefa.getDescricao())
+                    .append(" | Data: ").append(tarefa.getData())
+                    .append(" | Prioridade: ").append(tarefa.getPrioridade())
+                    .append(" | Status: ").append(tarefa.isConcluida() ? "Concluída" : "Pendente")
+                    .append("\n");
+                }
+            }
+            if (encontrou) {
+                javax.swing.JOptionPane.showMessageDialog(null, resultado.toString());
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null, "Nenhuma tarefa encontrada.");
+            }
+        }
+
     public void marcarTarefaConcluida(int indice) {
        try {
         int idx = indice - 1;
