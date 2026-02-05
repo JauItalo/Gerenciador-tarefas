@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 
@@ -37,10 +38,18 @@ public class Main {
                     String[] opcoesPrioridade = {"BAIXA", "MEDIA", "ALTA"};
                    
                     if (descricao != null && !descricao.isBlank()) {
-                        String dataStr = JOptionPane.showInputDialog("Digite a data da tarefa (AAAA-MM-DD):");
-                        java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
+                        String dataStr = JOptionPane.showInputDialog("Digite a data da tarefa (ddMMyyyy):");
+                        LocalDate data = null;
                         try {
-                             String prioridadeStr = (String) JOptionPane.showInputDialog(
+                            if (dataStr != null && dataStr.matches("\\d{8}")) {
+                                int dia = Integer.parseInt(dataStr.substring(0, 2));
+                                int mes = Integer.parseInt(dataStr.substring(2, 4));
+                                int ano = Integer.parseInt(dataStr.substring(4, 8));
+                                data = LocalDate.of(ano, mes, dia);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Formato inválido! Use ddMMyyyy.");
+                            }
+                            String prioridadeStr = (String) JOptionPane.showInputDialog(
                         null,
                         "Escolha a prioridade da tarefa:",
                         "Prioridade",
@@ -85,9 +94,17 @@ public class Main {
                             int indiceEditar = Integer.parseInt(idxStr);
                             String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição:");
                             if (novaDescricao != null && !novaDescricao.isBlank()) {
-                                String dataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa (AAAA-MM-DD):");
-                                java.time.LocalDate data = java.time.LocalDate.parse(dataStr);
+                                String dataStr = JOptionPane.showInputDialog("Digite a nova data da tarefa ddMMyyyy:");
+                                LocalDate data = null;
                                 try {
+                                    if (dataStr != null && dataStr.matches("\\d{8}")) {
+                                        int dia = Integer.parseInt(dataStr.substring(0, 2));
+                                        int mes = Integer.parseInt(dataStr.substring(2, 4));
+                                        int ano = Integer.parseInt(dataStr.substring(4, 8));
+                                        data = LocalDate.of(ano, mes, dia);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Formato inválido! Use ddMMyyyy.");
+                                    }
                                     String [] opcoesPrioridade = {"BAIXA", "MEDIA", "ALTA"};
                                     String prioridadeStr = (String) JOptionPane.showInputDialog(
                                         null,
