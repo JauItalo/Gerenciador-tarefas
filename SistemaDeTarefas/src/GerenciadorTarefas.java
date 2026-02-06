@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -48,6 +47,7 @@ public class GerenciadorTarefas {
         }
 
         JTable tabela = new JTable(dados, colunas){
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
