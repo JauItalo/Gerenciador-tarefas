@@ -1,42 +1,82 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+
+
+
+
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: gray;
+  margin: 0;
+  padding: 0;
+}
+
+
+div {
+  background: rgb(255, 255, 255);
+  max-width: 800px;
+  margin: 40px auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  padding: 42px;
+}
+
+h1 {
   text-align: center;
+  color: blue;
+  margin-bottom: 32px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="text"], input[type="date"], select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;;
+}
+button[type="submit"], .task-item button {
+  background: gray;
+  transition: background 0.3s;
+}
+button[type="submit"]:hover, .task-item button:hover {
+  background: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 5px solid gray;
+}
+.task-item span{
+  flex: 1;
+  
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
+.task-item span.completed {
+  text-decoration: line-through;
   color: #888;
+
+}
+
+.aviso {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.tasklist-title {
+  text-align: center;
+  color: #1976D2;      /* Azul igual ao título principal */
+  margin-bottom: 16px; /* Espaço abaixo do título */
+  font-size: 1.5rem;   /* Tamanho de fonte maior */
+  font-weight: bold;
 }

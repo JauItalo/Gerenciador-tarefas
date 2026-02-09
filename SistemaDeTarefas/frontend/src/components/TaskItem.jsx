@@ -4,7 +4,7 @@ import React from "react";
 function TaskItem({ task, onEdit, onDelete, onToggle}) {
     return (
         <div className="task-item">
-            <span
+            <span  className={task.concluida ? 'completed' : ''}
                 style={{
                     textDecoration: task.concluida ? 'line-through' : 'none',
                     color: task.concluida ? 'gray' : 'black'
