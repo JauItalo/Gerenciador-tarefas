@@ -6,14 +6,15 @@
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: gray;
+  background: url('./assets/fundo.jpeg') no-repeat center center fixed;
+  background-size: cover;
   margin: 0;
   padding: 0;
 }
 
 
 div {
-  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.8);
   max-width: 800px;
   margin: 40px auto;
   border-radius: 12px;

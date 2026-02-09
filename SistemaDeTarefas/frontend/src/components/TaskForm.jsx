@@ -17,7 +17,6 @@ function TaskForm({ onSubmit, initialData}) {
         setData('');
         setPrioridade('MEDIA');
     }
-
     return (
         <form onSubmit={handleSubmit}>
             <input
