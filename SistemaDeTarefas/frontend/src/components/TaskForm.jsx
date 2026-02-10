@@ -8,6 +8,19 @@ function TaskForm({ onSubmit, initialData}) {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        if (descricao.trim().length < 3) {
+            alert('A descrição deve conter pelo menos 3 caracteres.');
+            return;
+        }
+
+        const hoje = new Date();
+        const dalaSelecionada = new Date(data);
+        hoje.setHours(0, 0, 0, 0);
+        if (dalaSelecionada < hoje) {
+            alert('A data deve ser igual ou posterior a hoje.');
+            return;
+        }
         onSubmit({
             descricao,
             data,
