@@ -96,6 +96,9 @@ function App() {
             onChange={e => setBusca(e.target.value)}
             style={{marginRight: '10px'}}
             />
+        
+
+
             <select value={filtroPrioridade} onChange={e => setFiltroPrioridade(e.target.value)} style={{marginRight: '10px'}}>
               <option value='TODAS'>Todas prioridades</option>
               <option value='BAIXA'>Baixa</option>
@@ -107,7 +110,19 @@ function App() {
               <option value='CONCLUIDA'>Concluída</option>
               <option value='PENDENTE'>Pendente</option>
             </select>
+
+
+            <button
+              style={{ marginLeft: '10px', height: '40px' }}
+              onClick={e => {
+                e.preventDefault();
+                setBusca(buscaTemp);
+           }}
+        >
+            Buscar
+          </button>
         </div>
+            
         <TaskForm
           onSubmit={editingTask
             ? data => handleEditTask(editingTask.id, data)

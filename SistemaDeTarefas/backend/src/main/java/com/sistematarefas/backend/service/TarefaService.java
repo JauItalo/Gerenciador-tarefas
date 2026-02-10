@@ -1,11 +1,12 @@
-package com.sistematarefas.backend.servie;
-
-import com.sistematarefas.backend.model.Tarefa;
-import com.sistematarefas.backend.repository.TarefaRepository;
-import org.springframework.stereotype.Service;
+package com.sistematarefas.backend.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.sistematarefas.backend.model.Tarefa;
+import com.sistematarefas.backend.repository.TarefaRepository;
 
 
 

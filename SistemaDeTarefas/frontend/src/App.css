@@ -1,19 +1,13 @@
-
-
-
-
-
-
+/* ====== Fundo do app ====== */
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  /* Imagem de fundo fixa, centralizada e cobrindo toda a tela */
   background: url('./assets/fundo.jpeg') no-repeat center center fixed;
   background-size: cover;
-  margin: 0;
-  padding: 0;
 }
 
-
+/* ====== Container principal ====== */
 div {
+  /* Caixa centralizada, com fundo branco semi-transparente e sombra */
   background: rgba(255, 255, 255, 0.8);
   max-width: 800px;
   margin: 40px auto;
@@ -22,12 +16,25 @@ div {
   padding: 42px;
 }
 
+/* ====== Título principal ====== */
 h1 {
   text-align: center;
   color: blue;
   margin-bottom: 32px;
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
+/* ====== Título da lista de tarefas ====== */
+.tasklist-title {
+  text-align: center;
+  color: #1976D2;      /* Azul igual ao título principal */
+  margin-bottom: 16px; /* Espaço abaixo do título */
+  font-size: 1.5rem;   /* Tamanho de fonte maior */
+  font-weight: bold;
+}
+
+/* ====== Formulário de tarefas ====== */
 form {
   display: flex;
   gap: 12px;
@@ -39,34 +46,46 @@ input[type="text"], input[type="date"], select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 14px;;
+  font-size: 14px;
 }
-button[type="submit"], .task-item button {
-  background: gray;
-  transition: background 0.3s;
+
+/* ====== Botões ====== */
+button, button[type="submit"], .task-item button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: gray;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.25s;
 }
-button[type="submit"]:hover, .task-item button:hover {
+button:hover, button[type="submit"]:hover, .task-item button:hover {
   background: white;
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
-
+/* ====== Item de tarefa ====== */
 .task-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 5px solid gray;
 }
-.task-item span{
+.task-item span {
   flex: 1;
-  
 }
-
 .task-item span.completed {
   text-decoration: line-through;
   color: #888;
-
 }
 
+/* ====== Mensagem de aviso (nenhuma tarefa) ====== */
 .aviso {
   text-align: center;
   color: #888;
@@ -74,10 +93,14 @@ button[type="submit"]:hover, .task-item button:hover {
   margin-top: 20px;
 }
 
-.tasklist-title {
-  text-align: center;
-  color: #1976D2;      /* Azul igual ao título principal */
-  margin-bottom: 16px; /* Espaço abaixo do título */
-  font-size: 1.5rem;   /* Tamanho de fonte maior */
-  font-weight: bold;
+/* ====== Responsividade ====== */
+@media (max-width: 900px) {
+  div {
+    max-width: 98vw;
+    padding: 10px;
+  }
+  form {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

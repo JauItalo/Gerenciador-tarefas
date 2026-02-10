@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistematarefas.backend.model.Tarefa;
-import com.sistematarefas.backend.servie.TarefaService;
+import com.sistematarefas.backend.service.TarefaService;
 
 @RestController
 @RequestMapping("/api/tarefas")
